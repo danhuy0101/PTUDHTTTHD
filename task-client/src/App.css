@@ -1,214 +1,322 @@
-/* Màu chủ đạo */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+}
+
+
 :root {
-  --pink-light: #FFDDEE; /* Hồng nhẹ */
-  --blue-primary: #3B82F6; /* Xanh dương đậm hơn một chút */
-  --blue-light: #F0F4F8; /* Xanh nền nhạt (dùng cho background/card) */
+  --purple-primary: #8A2BE2;       
+  --purple-dark: #6A1B9A;
+  --purple-light-bg: #F3E5F5;      
+  
+  --gold-accent: #FFD700;          
+  --gold-dark: #E6C200;
+
+  --fuchsia-accent: #FF00FF;      
+
+  --status-completed: #16C79A; 
+  --status-in-progress: #FFD700; 
+
   --gray-text: #333;
-  --gray-border: #E0E0E0;
-  --green-completed: #10B981; /* Xanh lá cho Hoàn thành */
-  --orange-progress: #F59E0B; /* Cam/vàng cho Đang làm */
+  --gray-border: #D1C4E9;
+
+  --pink-soft: #F8D6EB;
+  --header-bg-soft: #EDE1FA; 
 }
 
-/* Nền tổng thể */
+
 .app-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Điều chỉnh để card không bị căn giữa quá thấp */
-  min-height: 100vh;
-  padding-top: 50px;
-  background-color: var(--blue-light); 
-  font-family: Arial, sans-serif;
+  justify-content: center; 
+  align-items: center; 
+  background-color: var(--purple-light-bg); 
 }
 
-/* Card chính */
+
 .task-manager-card {
   background: white;
+  padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 0 10px rgba(255, 255, 255, 0.5); /* Thêm viền trắng mờ */
-  padding: 30px;
   width: 90%;
-  max-width: 600px;
+  max-width: 650px; 
+  box-shadow:
+    0 15px 35px rgba(138, 43, 226, 0.25),
+    0 0 0 5px var(--gold-accent),
+    0 0 0 10px rgba(255, 255, 255, 0.7);
+  
+  margin: 0; 
 }
 
 .card-title {
   text-align: center;
-  color: var(--gray-text);
   margin-bottom: 30px;
-  font-size: 1.8em;
-  font-weight: 600;
-  padding: 10px 0;
-  border-bottom: 3px solid var(--pink-light); /* Điểm nhấn hồng nhẹ */
+  color: var(--purple-primary);
+  font-size: 2rem;
+  font-weight: bold;
+  border-bottom: 3px solid var(--gold-accent);
+  padding-bottom: 10px;
 }
 
-/* Nhóm Input */
+
 .input-group {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.task-input,
-.due-date-input {
-  padding: 10px 15px;
-  border: 1px solid var(--gray-border);
-  border-radius: 8px;
-  font-size: 1em;
-  flex-grow: 1; /* Cho Task Input chiếm không gian lớn hơn */
-  width: auto;
-}
-
 .task-input {
-  flex-basis: 50%;
-}
-.due-date-input {
-  flex-basis: 30%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-border);
+  font-size: 1rem;
+  flex-basis: 45%;
 }
 
-.add-button {
-  background-color: var(--blue-primary);
-  color: white;
-  border: none;
-  padding: 10px 20px;
+.due-date-input {
+  padding: 12px 15px;
   border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
+  border: 1px solid var(--gray-border);
+  font-size: 1rem;
   flex-basis: 20%;
 }
 
-.add-button:hover:not(:disabled) {
-  background-color: #316cd9;
-}
-.add-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.add-button {
+  background-color: var(--purple-primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.25s;
+  flex-basis: 25%; 
 }
 
-
-/* Dropdown Lọc */
-.filter-dropdown {
-  margin-bottom: 20px;
+.add-button:hover {
+  background-color: var(--purple-dark);
+  transform: translateY(-2px);
 }
+
 
 .filter-select {
-  padding: 8px 12px;
-  border: 1px solid var(--gray-border);
-  border-radius: 8px;
-  background-color: var(--pink-light); /* Màu nền hồng nhẹ */
-  color: var(--gray-text);
-  font-weight: 500;
+  padding: 10px 15px;
+  border: 2px solid var(--purple-primary);
+  border-radius: 10px;
+  background-color: var(--pink-soft);
+  font-weight: 600;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
-/* Danh sách Task */
+
 .task-list-container {
   border: 1px solid var(--gray-border);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-.task-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Header */
 .task-header {
   display: flex;
-  background-color: #F8F8F8; /* Nền header */
+  padding: 15px 0px 15px 0px; 
+  background: var(--header-bg-soft); 
   font-weight: bold;
-  padding: 10px 15px;
-  border-bottom: 1px solid var(--gray-border);
-  color: var(--gray-text);
+  color: var(--purple-primary);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
-.header-item {
-  padding: 0 5px;
-  text-align: left;
+.task-header .task-col,
+.task-header .due-date-col,
+.task-header .status-col {
+    margin-left: 4px; 
 }
 
-/* Task Item */
-.task-item {
+
+.task-col,
+.due-date-col,
+.status-col,
+.action-col {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
-  border-bottom: 1px solid #F0F0F0;
-  background-color: white;
+  padding: 0 15px;
+  flex-shrink: 0;
+  justify-content: flex-start; 
 }
 
-.task-item:last-child {
-  border-bottom: none;
+.task-col { 
+  flex-basis: 40%; 
+  flex-grow: 1; 
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
-/* Định nghĩa cột */
-.task-col {
-  flex: 4; /* Task chiếm nhiều không gian nhất */
+.due-date-col { 
+  flex-basis: 20%; 
+  flex-grow: 0;
+  min-width: 100px;
+  padding: 0 15px; 
 }
-.due-date-col {
-  flex: 2;
-  text-align: center;
+
+.status-col { 
+  flex-basis: 20%; 
+  flex-grow: 0;
+  min-width: 100px;
+  padding: 0 15px; 
 }
-.status-col {
-  flex: 2;
-  text-align: center;
+
+.action-col { 
+  flex: 1; 
+  min-width: 70px; 
+  justify-content: flex-end; 
+  gap: 10px; 
+  padding-right: 15px;
+  padding-left: 15px; 
 }
-.action-col {
-  flex: 1;
+
+.task-item {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  padding: 12px 0px 12px 0px; 
+  border-bottom: 1px solid #F3F3F3;
+  background: white;
+  align-items: center; 
+  margin-left: -25px;
+}
+
+.task-item:hover {
+  background-color: #FAF4FF;
 }
 
 
-/* Hiển thị Tên Task */
-.task-title-display {
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-/* Hiển thị Trạng thái (Status) */
 .task-status {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.85em;
+  padding: 4px 10px; 
+  border-radius: 10px; 
   font-weight: 600;
-  color: white;
-  display: inline-block;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.85rem; 
+  white-space: nowrap; 
+  min-width: 85px; 
+  text-align: center;
+  border: none;
+  margin: 0; 
 }
 
 .task-status.in-progress {
-  background-color: var(--orange-progress);
+  background-color: var(--status-in-progress); 
+  color: #333; 
 }
 
 .task-status.completed {
-  background-color: var(--green-completed);
+  background-color: var(--status-completed); 
+  color: white; 
 }
 
-
-/* Hành động (Action Icons) */
-.task-actions {
-  color: #999;
+.task-status:hover {
+  transform: scale(1.05);
 }
+
 
 .action-icon {
+  font-size: 1.1rem; 
   cursor: pointer;
-  padding: 5px;
-  transition: color 0.2s;
-  font-size: 1.1em;
+  transition: 0.2s;
+  color: #777;
+  padding: 5px; 
 }
 
 .edit-icon:hover {
-  color: var(--blue-primary); /* Icon sửa màu xanh */
+  color: var(--fuchsia-accent);
 }
-
 .delete-icon:hover {
-  color: #ff4d4d; /* Icon xóa màu đỏ */
+  color: #ff4d4d;
 }
 
-/* Text khi hoàn thành */
-.task-item .completed {
-  text-decoration: line-through;
-  color: #999;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.modal-box {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  margin: 8px auto;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.status-dropdown {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px auto 0 auto;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.save-btn {
+  background: var(--purple-primary);
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  background: var(--purple-dark);
+}
+
+.cancel-btn {
+  background: #999;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
